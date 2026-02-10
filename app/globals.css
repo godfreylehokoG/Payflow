@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #2563eb;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-bg: #ffffff;
+  --color-card: #f9fafb;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.app-safe-area {
+  padding-bottom: env(safe-area-inset-bottom);
+}
