@@ -20,9 +20,13 @@ export async function processSend(input: {
   merchantId?: string;
   amount: number;
 }) {
-  const { data, error } = await supabase.functions.invoke("process-send", {
-    body: input,
+  const { data, error } = await supabase.rpc("process_send", {
+    p_sender_id: input.senderId,
+    p_amount: input.amount,
+    p_recipient_phone: input.recipientPhone || null,
+    p_merchant_id: input.merchantId || null,
   });
+
   if (error) throw error;
   return data;
 }
@@ -32,9 +36,12 @@ export async function processWithdraw(input: {
   amount: number;
   merchantId: string;
 }) {
-  const { data, error } = await supabase.functions.invoke("process-withdraw", {
-    body: input,
+  const { data, error } = await supabase.rpc("process_withdraw", {
+    p_user_id: input.userId,
+    p_amount: input.amount,
+    p_merchant_id: input.merchantId,
   });
+
   if (error) throw error;
   return data;
 }
@@ -44,9 +51,12 @@ export async function processBorrow(input: {
   amount: number;
   purpose: string;
 }) {
-  const { data, error } = await supabase.functions.invoke("process-borrow", {
-    body: input,
+  const { data, error } = await supabase.rpc("process_borrow", {
+    p_user_id: input.userId,
+    p_amount: input.amount,
+    p_purpose: input.purpose,
   });
+
   if (error) throw error;
   return data;
 }
